@@ -1,0 +1,64 @@
+{
+  "name": "@redux-io/util",
+  "version": "0.0.0",
+  "description": "Redux IO utility functions",
+  "author": "Leonard Kinday <leonard@kinday.ru>",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "lib/redux-io-util.es.js",
+  "files": [
+    "lib"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "yarn build-dev && yarn build-prod",
+    "build-dev": "rollup --config",
+    "build-prod": "NODE_ENV=production rollup --config && size-limit",
+    "coverage": "jest --coverage",
+    "test": "jest --config ./jest.config.js",
+    "test-all": "yarn test && yarn test-build && yarn test-build-prod",
+    "test-build": "TARGET_TYPE=build yarn test",
+    "test-build-prod": "TARGET_ENV=production yarn test-build"
+  },
+  "size-limit": [
+    {
+      "limit": "1 KB",
+      "path": "lib/redux-io-util.production.js"
+    }
+  ],
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.1",
+    "babel-preset-env": "^1.6.1",
+    "husky": "^0.14.3",
+    "jest": "^22.4.2",
+    "lint-staged": "^7.0.5",
+    "rollup": "^0.56.3",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-uglify": "^3.0.0",
+    "size-limit": "^0.15.2",
+    "sort-package-json": "^1.13.0",
+    "xo": "^0.21.0"
+  },
+  "xo": {
+    "envs": ["jest", "node"],
+    "esnext": true,
+    "prettier": true,
+    "semicolon": false,
+    "space": true
+  },
+  "lint-staged": {
+    "*.js": [
+      "xo --fix",
+      "git add"
+    ],
+    "package.json": [
+      "sort-package-json",
+      "git add"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
